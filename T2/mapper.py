@@ -25,15 +25,15 @@ def similarity(v1, v2):
 # Function to create similarity matrix
 def construct_sim(embeds):
 
-    sims = dict()
+    sims = list()
 
-    for i in embeds.keys():
-        s = dict()
+    for i in sorted(embeds):
+        s = list()
 
-        for j in embeds.keys():
-            s[j] = similarity(embeds[i], embeds[j])
+        for j in sorted(embeds):
+            s.append(similarity(embeds[i], embeds[j]))
         
-        sims[i] = s
+        sims.append(s)
 
     return sims
 
@@ -54,34 +54,37 @@ embeds = json.load(embed_file)
 
 
 # Function to create similarity matrix
-sim_matrix = construct_sim
+sim_matrix = construct_sim(embeds)
+print(sim_matrix)
 
 
-for line in sys.stdin:
-    line = line.strip()
-    node, outlinks = line.split(' ', 1)
-    try:
-        node = int(node)
-        # print(node)
-        outlinks = outlinks[1:-1].split(',')
-        # print(outlinks)
-        outlinks = [int(i) for i in outlinks]
-    except ValueError:
-        print('Error1') 
-        exit()
+# for line in sys.stdin:
+#     line = line.strip()
+#     node, outlinks = line.split(' ', 1)
+#     try:
+#         # Converting to int
+#         node = int(node)
+        
+#         # Removing square brackets from string
+#         outlinks = outlinks[1:-1].split(',')
+
+#         # Converting to int
+#         outlinks = [int(i) for i in outlinks]
+#     except ValueError:
+#         print('Error1') 
+#         exit()
     
-    # print(node, outlinks)
-    for outlink in outlinks:
-        # Change this based on DS used for v
-        init_contrib = v[node]/len(outlinks)
+#     for outlink in outlinks:
+#         # Calculate initial contribution
+#         init_contrib = v[node]/len(outlinks)
 
-        if node == outlink:
-            sim = 1
-        else:
-            sim =  sims[min(node, outlink)][max(node, outlink)]
+#         if node == outlink:
+#             sim = 1
+#         else:
+#             sim =  sims[min(node, outlink)][max(node, outlink)]
 
-        tot_contrib = init_contrib * sim
-        print(outlink, tot_contrib)
+#         tot_contrib = init_contrib * sim
+#         print(outlink, tot_contrib)
     
 
 
