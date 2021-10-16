@@ -75,16 +75,25 @@ for line in sys.stdin:
     # Calculating initial contributions
     init_contrib = v[str(node)]/len(outlinks)
 
-    M = dict()
-    for n in outlinks:
-        M[n] = init_contrib
+    # M = dict()
+    # for n in outlinks:
+    #     M[n] = init_contrib
     
-    C = dict()
-    sims = sim_matrix[str(node)]
+    # C = dict()
+    # sims = sim_matrix[str(node)]
 
-    for n in outlinks:
-        C[str(n)] = M[n] * sims[str(n)]
+    # for n in outlinks:
+    #     C[str(n)] = M[n] * sims[str(n)]
 
-    print(f'{node}\t{C}')
+    # print(f'{node}\t{C}')
+
+    for outlink in outlinks:
+         if node == outlink:
+             sim = 1
+         else:
+             sim =  sim_matrix[str(min(node, outlink))][str(max(node, outlink))]
+
+         tot_contrib = init_contrib * sim
+         print(outlink, tot_contrib, split = '\t')
 
        

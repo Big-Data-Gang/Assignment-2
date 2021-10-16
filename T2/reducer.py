@@ -1,27 +1,21 @@
 #!/usr/bin/env python3
 import sys
-import json
 
-c = dict()
+curr_node = None
+total_contrib = 0
 
 for line in sys.stdin:
     line = line.strip()
-    node, contribs = line.split('\t')
+    node, contrib = line.split('\t')
+    node = int(node)
+    contrib = float(node)
 
-    # Replacing ' with " to convert into json friendly format
-    contribs = contribs.replace("\'", "\"")
-    contribs = json.loads(contribs)
-    
-    for node in contribs:
-        if node not in c:
-            c[node] = contribs[node]
-        else:
-            c[node] += contribs[node]
+    if node == curr_node:
+        total_contrib += contrib
+    else:
+        if curr_node:
+            new_rank = round(0.15 + 0.85 * total_contrib, 2)
+            # TODO : Write new_rank in
 
-# Convert to final contribs
-
-for node in c:
-    c[node] = 0.15 + 0.85 * c[node]
-
-for i in sorted(c):
-    print(i, round(c[i], 2))
+        curr_node = node
+        total_contrib = contrib 
