@@ -19,7 +19,7 @@ def similarity(v1, v2):
 
     ans = dot_prod / (mod_v1 * mod_v2)
 
-    return round(ans, 2)    
+    return ans    
 
 
 # Function to create similarity matrix
@@ -73,7 +73,7 @@ for line in sys.stdin:
         exit()
     
     # Calculating initial contributions
-    init_contrib = round(v[str(node)]/len(outlinks), 2)
+    init_contrib = v[str(node)]/len(outlinks)
 
     M = dict()
     for n in outlinks:
