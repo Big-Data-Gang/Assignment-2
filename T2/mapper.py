@@ -85,6 +85,6 @@ for line in sys.stdin:
     for n in outlinks:
         C[n] = M[n] * sims[str(n)]
 
-    print(node, C)
+    print(f'{node}\t{C}')
 
        
