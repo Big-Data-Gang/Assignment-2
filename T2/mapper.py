@@ -83,7 +83,7 @@ for line in sys.stdin:
     sims = sim_matrix[str(node)]
 
     for n in outlinks:
-        C[n] = M[n] * sims[str(n)]
+        C[str(n)] = M[n] * sims[str(n)]
 
     print(f'{node}\t{C}')
 
