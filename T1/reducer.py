@@ -5,10 +5,10 @@ import sys
 curr_node = None
 op_list = []
 fname = sys.argv[1]
-# f1 = open("adj_list.txt", "a")
-f2 = open(fname, "a")
+
 
 if __name__ == "__main__":
+    f2 = open(fname, "a")
     for line in sys.stdin:
         line = line.strip()
 
