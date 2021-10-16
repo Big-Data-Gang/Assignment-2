@@ -3,6 +3,7 @@ import sys
 
 curr_node = None
 total_contrib = 0
+node = None
 
 for line in sys.stdin:
     line = line.strip()
