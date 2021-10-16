@@ -93,7 +93,7 @@ for line in sys.stdin:
             #print(node, outlink)
             try:
                 sim =  sim_matrix[str(min(node, outlink))][str(max(node, outlink))]
-            except:
+            except KeyError:
                 sim =  sim_matrix[str(max(node, outlink))][str(min(node, outlink))]
         # Calculate C value for (node, outlook) combination
         tot_contrib = init_contrib * sim
