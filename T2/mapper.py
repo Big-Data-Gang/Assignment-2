@@ -58,7 +58,7 @@ sim_matrix = construct_sim(embeds)
 
 for line in sys.stdin:
     line = line.strip()
-    node, outlinks = line.split('\t', 1)
+    node, outlinks = line.split(' ', 1)
     try:
         # Converting to int
         node = int(node)
