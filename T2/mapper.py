@@ -21,6 +21,13 @@ def similarity(v1, v2):
 
     return ans    
 
+# Check for inverse entry
+def inverse(sims, i, j):
+    if j in sims:
+        if i in sims[j]:
+            return True
+    return False
+
 
 # Function to create similarity matrix
 def construct_sim(embeds):
@@ -31,7 +38,10 @@ def construct_sim(embeds):
         s = dict()
 
         for j in embeds.keys():
-            s[j] = similarity(embeds[i], embeds[j])
+            if inverse(sims, i, j):
+                pass
+            else:
+                s[j] = similarity(embeds[i], embeds[j])
 
         sims[i] = s
 
@@ -81,7 +91,11 @@ for line in sys.stdin:
             sim = 1
         else:
             # Get similarity between node and outlink
-            sim =  sim_matrix[str(min(node, outlink))][str(max(node, outlink))]
+            #print(node, outlink)
+            try:
+                sim =  sim_matrix[str(min(node, outlink))][str(max(node, outlink))]
+            except:
+                sim =  sim_matrix[str(max(node, outlink))][str(min(node, outlink))]
         # Calculate C value for (node, outlook) combination
         tot_contrib = init_contrib * sim
         # Print outlink and contribution to outlink
