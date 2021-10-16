@@ -58,7 +58,7 @@ sim_matrix = construct_sim(embeds)
 
 for line in sys.stdin:
     line = line.strip()
-    node, outlinks = line.split(' ', 1)
+    node, outlinks = line.split('\t', 1)
     try:
         # Converting to int
         node = int(node)
@@ -88,12 +88,12 @@ for line in sys.stdin:
     # print(f'{node}\t{C}')
 
     for outlink in outlinks:
-         if node == outlink:
-             sim = 1
-         else:
-             sim =  sim_matrix[str(min(node, outlink))][str(max(node, outlink))]
+        if node == outlink:
+            sim = 1
+        else:
+            sim =  sim_matrix[str(min(node, outlink))][str(max(node, outlink))]
 
-         tot_contrib = init_contrib * sim
-         print(outlink, tot_contrib, split = '\t')
+        tot_contrib = init_contrib * sim
+        print(outlink, tot_contrib, sep = '\t')
 
        
