@@ -25,15 +25,15 @@ def similarity(v1, v2):
 # Function to create similarity matrix
 def construct_sim(embeds):
 
-    sims = list()
+    sims = dict()
 
-    for i in sorted(embeds):
-        s = list()
+    for i in embeds.keys():
+        s = dict()
 
-        for j in sorted(embeds):
-            s.append(similarity(embeds[i], embeds[j]))
-        
-        sims.append(s)
+        for j in embeds.keys():
+            s[j] = similarity(embeds[i], embeds[j])
+
+        sims[i] = s
 
     return sims
 
@@ -55,37 +55,36 @@ embeds = json.load(embed_file)
 
 # Function to create similarity matrix
 sim_matrix = construct_sim(embeds)
-print(sim_matrix)
 
-
-# for line in sys.stdin:
-#     line = line.strip()
-#     node, outlinks = line.split(' ', 1)
-#     try:
-#         # Converting to int
-#         node = int(node)
+for line in sys.stdin:
+    line = line.strip()
+    node, outlinks = line.split('\t', 1)
+    try:
+        # Converting to int
+        node = int(node)
         
-#         # Removing square brackets from string
-#         outlinks = outlinks[1:-1].split(',')
+        # Removing square brackets from stri`ng
+        outlinks = outlinks[1:-1].split(',')
 
-#         # Converting to int
-#         outlinks = [int(i) for i in outlinks]
-#     except ValueError:
-#         print('Error1') 
-#         exit()
+        # Converting to int
+        outlinks = [int(i) for i in outlinks]
+    except ValueError:
+        print('Error1') 
+        exit()
     
-#     for outlink in outlinks:
-#         # Calculate initial contribution
-#         init_contrib = v[node]/len(outlinks)
+    # Calculating initial contributions
+    init_contrib = round(v[str(node)]/len(outlinks), 2)
 
-#         if node == outlink:
-#             sim = 1
-#         else:
-#             sim =  sims[min(node, outlink)][max(node, outlink)]
-
-#         tot_contrib = init_contrib * sim
-#         print(outlink, tot_contrib)
+    M = dict()
+    for n in outlinks:
+        M[n] = init_contrib
     
+    C = dict()
+    sims = sim_matrix[str(node)]
 
+    for n in outlinks:
+        C[n] = M[n] * sims[str(n)]
+
+    print(node, C)
 
        
