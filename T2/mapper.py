@@ -62,7 +62,6 @@ for line in v_file.readlines():
 embed_file = open(embed_path, 'r') 
 embeds = json.load(embed_file)
 
-
 # Function to create similarity matrix
 sim_matrix = construct_sim(embeds)
 
