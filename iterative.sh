@@ -7,8 +7,8 @@ $HADOOP_HOME/bin/hadoop dfsadmin -safemode leave
 hdfs dfs -rm -r /Assignment-2/output/task-* 
 
 hadoop jar $HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-3.2.2.jar \
--mapper "'/home/pes_bigdata/Desktop/Assignment-2/mapper_t1.py'" \
--reducer "'/home/pes_bigdata/Desktop/Assignment-2/reducer_t1.py' '/home/pes_bigdata/Desktop/Assignment-2/v'" \
+-mapper "'/home/pes1ug19cs563/Documents/Big-Data/Assignment-2/T1/mapper.py'" \
+-reducer "'/home/pes1ug19cs563/Documents/Big-Data/Assignment-2/T1/reducer.py' 'home/pes1ug19cs563/Documents/Big-Data/Assignment-2/T1/v.txt" \
 -input /Assignment-2/Input/dataset-sample.txt \
 -output /Assignment-2/output/task-1-output
 

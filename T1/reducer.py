@@ -8,7 +8,7 @@ fname = sys.argv[1]
 
 
 if __name__ == "__main__":
-    f2 = open(fname, "a")
+    f2 = open(fname, "w")
     for line in sys.stdin:
         line = line.strip()
 
