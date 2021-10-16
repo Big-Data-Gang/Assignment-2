@@ -75,25 +75,16 @@ for line in sys.stdin:
     # Calculating initial contributions
     init_contrib = v[str(node)]/len(outlinks)
 
-    # M = dict()
-    # for n in outlinks:
-    #     M[n] = init_contrib
-    
-    # C = dict()
-    # sims = sim_matrix[str(node)]
-
-    # for n in outlinks:
-    #     C[str(n)] = M[n] * sims[str(n)]
-
-    # print(f'{node}\t{C}')
-
     for outlink in outlinks:
+        # If self loop
         if node == outlink:
             sim = 1
         else:
+            # Get similarity between node and outlink
             sim =  sim_matrix[str(min(node, outlink))][str(max(node, outlink))]
-
+        # Calculate C value for (node, outlook) combination
         tot_contrib = init_contrib * sim
+        # Print outlink and contribution to outlink
         print(outlink, tot_contrib, sep = '\t')
 
        
