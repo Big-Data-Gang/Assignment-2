@@ -20,12 +20,16 @@ for line in sys.stdin:
     else:
         # If there is a current node
         if curr_node:
-            new_rank = round(0.15 + 0.85 * total_contrib, 2)
-            print(f"{curr_node},{new_rank}")
+            # new_rank = round(0.15 + 0.85 * total_contrib, 2)
+            new_rank = 0.15 + 0.85 * total_contrib
+            # print(f"{curr_node},{new_rank}")
+            print(f"{curr_node},{new_rank:.2f}")
 
         curr_node = node
         total_contrib = contrib 
 
 if curr_node == node:
-    new_rank = round(0.15 + 0.85 * total_contrib, 2)
-    print(f"{curr_node},{new_rank}")
+    # new_rank = round(0.15 + 0.85 * total_contrib, 2)
+    new_rank = 0.15 + 0.85 * total_contrib
+    # print(f"{curr_node},{new_rank}")
+    print(f"{curr_node},{new_rank:.2f}")
