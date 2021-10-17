@@ -82,6 +82,9 @@ def main():
         except ValueError:
             continue
         
+        # Print 0 for each source node as well (To handle page rank calculation for nodes with no incoming links)
+        print(node, 0, sep = '\t')
+
         # Calculating initial contributions
         init_contrib = v[str(node)]/len(outlinks)
 
