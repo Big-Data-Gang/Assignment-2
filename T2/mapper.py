@@ -58,7 +58,7 @@ def main():
     v = dict()
     for line in v_file.readlines():
         key, value = line.strip().split(',')
-        v[key] = int(value)
+        v[key] = float(value)
 
     # Loading page embeddings
     embed_file = open(embed_path, 'r') 
