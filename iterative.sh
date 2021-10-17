@@ -47,4 +47,5 @@ done
 # 	echo "$CONVERGE
 # done
 # echo "T2 done"
+# rm v v1 log*
 #  -------------------------------
