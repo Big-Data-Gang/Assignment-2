@@ -27,3 +27,24 @@ do
 	hdfs dfs -rm -r /Assignment-2/output/task-2-output/
 	echo $CONVERGE
 done
+
+# to run the scripts without hadoop
+# run the following commands inside `/Assignment-2`
+
+
+#  ------------------------------
+# cat T1/dataset_1percent.txt | python3 T1/mapper.py | sort -k 1,1 | python3 T1/reducer.py v > temp.txt
+# echo "T1 done"
+# CONVERGE=1
+# ITER=1
+
+# while [ "$CONVERGE" -ne 0 ]
+# do
+# 	cat temp.txt | python3 T2/mapper.py v T2/embedding_1percent.json| sort -k 1,1 | python3 T2/reducer.py > v1
+# 	echo "############################# ITERATION $ITER #############################"
+# 	CONVERGE=$(python3 check_conv.py $ITER>&1)
+# 	ITER=$((ITER+1))
+# 	echo "$CONVERGE
+# done
+# echo "T2 done"
+#  -------------------------------
