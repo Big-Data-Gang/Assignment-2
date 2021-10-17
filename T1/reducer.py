@@ -6,6 +6,7 @@ curr_node = None
 op_list = []
 fname = sys.argv[1]
 
+incoming = None
 
 if __name__ == "__main__":
     f2 = open(fname, "w")
@@ -33,7 +34,10 @@ if __name__ == "__main__":
             curr_node = incoming
             op_list = []
             op_list.append(outgoing)
-
+    if incoming == None:
+        #incase the issue with -sort or file opening, then the variable incoming will remain as None
+        print("STDIN failed")
+        exit()
     if curr_node == incoming:
         print(f"{curr_node}\t{op_list}")
         f2.write(f"{curr_node},1\n")

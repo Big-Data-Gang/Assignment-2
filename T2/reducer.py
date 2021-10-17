@@ -9,9 +9,11 @@ for line in sys.stdin:
     line = line.strip()
     node, contrib = line.split('\t')
     # Convert node and contrib to float
-    node = int(node)
-    contrib = float(contrib)
-
+    try:
+        node = int(node)
+        contrib = float(contrib)
+    except ValueError:
+        continue
     # If current node is same as previous node
     if node == curr_node:
         total_contrib += contrib
