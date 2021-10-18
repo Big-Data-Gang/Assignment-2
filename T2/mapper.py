@@ -23,31 +23,6 @@ def similarity(v1, v2):
         return 0
     return ans    
 
-# Check for inverse entry
-def inverse(sims, i, j):
-    if j in sims:
-        if i in sims[j]:
-            return True
-    return False
-
-
-# Function to create similarity matrix
-def construct_sim(embeds):
-
-    sims = dict()
-
-    for i in embeds.keys():
-        s = dict()
-
-        for j in embeds.keys():
-            if inverse(sims, i, j):
-                pass
-            else:
-                s[j] = similarity(embeds[i], embeds[j])
-
-        sims[i] = s
-
-    return sims
 def main():
     # Getting arguments for the various files
     v_path = sys.argv[1]
@@ -63,9 +38,6 @@ def main():
     # Loading page embeddings
     embed_file = open(embed_path, 'r') 
     embeds = json.load(embed_file)
-
-    # Function to create similarity matrix
-    sim_matrix = construct_sim(embeds)
 
     for line in sys.stdin:
         line = line.strip()
@@ -94,11 +66,8 @@ def main():
                 sim = 1
             else:
                 # Get similarity between node and outlink
-                #print(node, outlink)
-                try:
-                    sim =  sim_matrix[str(min(node, outlink))][str(max(node, outlink))]
-                except KeyError:
-                    sim =  sim_matrix[str(max(node, outlink))][str(min(node, outlink))]
+                sim = similarity(embeds[str(node)], embeds[str(outlink)])
+                
             # Calculate C value for (node, outlook) combination
             tot_contrib = init_contrib * sim
             # Print outlink and contribution to outlink
